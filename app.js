@@ -27,6 +27,7 @@ ${tg.initDataUnsafe.user.last_name}`;
 p1.innerText = userId;
 
 usercard.appendChild(p);
+usercard.appendChild(p1);
 
 btn1.addEventListener("click", function(){
 	if (tg.MainButton.isVisible) {

@@ -13,6 +13,27 @@ let btn3 = document.getElementById("btn3");
 let btn4 = document.getElementById("btn4");
 let btn5 = document.getElementById("btn5");
 let btn6 = document.getElementById("btn6");
+let send = document.getElementById("send");
+
+let usercard = document.getElementById("usercard");
+
+let p = document.createElement("p");
+let p1 = document.createElement("p");
+var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+ 
+
+p.innerText = `${tg.initDataUnsafe.user.first_name}
+${tg.initDataUnsafe.user.last_name}`;
+p1.innerText = userId;
+
+
+usercard.appendChild(p);
+usercard.appendChild(p1);
+
+send.addEventListener("click", function(){
+	fetch('https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/sendMessage?chat_id=userId&text=fromapp2')
+});
+
 
 btn1.addEventListener("click", function(){
 	if (tg.MainButton.isVisible) {
@@ -86,17 +107,3 @@ Telegram.WebApp.onEvent("mainButtonClicked", function(){
 });
 
 
-let usercard = document.getElementById("usercard");
-
-let p = document.createElement("p");
-let p1 = document.createElement("p");
-var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
- 
-
-p.innerText = `${tg.initDataUnsafe.user.first_name}
-${tg.initDataUnsafe.user.last_name}`;
-p1.innerText = userId;
-
-
-usercard.appendChild(p);
-usercard.appendChild(p1);

@@ -96,7 +96,8 @@ btn6.addEventListener("click", function(){
 });
 
 send.addEventListener("click", function(){
-	fetch('https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/sendMessage?chat_id=`${userId}`&text=yo2');
+	fetch(`https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/sendMessage?chat_id=${userId}&text=yo2`);
+;
 
 	
 });

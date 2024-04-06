@@ -213,7 +213,7 @@ Telegram.WebApp.onEvent("mainButtonClicked", function(){
 var i = 59;
 
 // Запрос каждые 5 сек. Чтобы запустить скрипт, нужно разкоментить строку ниже и в переменную выше занести число последних изменений
-setInterval(function(){
+//setInterval(function(){
     
     fetch('https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/getUpdates')
       .then(response => {

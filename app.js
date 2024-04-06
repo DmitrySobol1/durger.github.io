@@ -24,7 +24,7 @@ var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
 p.innerText = `${tg.initDataUnsafe.user.first_name}
 ${tg.initDataUnsafe.user.last_name}`;
 
-p1.innerText = userId;
+p1.innerText = 'id = '+ userId;
 
 usercard.appendChild(p);
 usercard.appendChild(p1);
@@ -96,7 +96,8 @@ btn6.addEventListener("click", function(){
 });
 
 send.addEventListener("click", function(){
-	fetch('https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/sendMessage?chat_id=1856600462&text=yo1')
+	fetch('https://api.telegram.org/bot5626487008:AAHbeWsSvZ1imNZnbHHEWB56IgyT86SlPh8/sendMessage?chat_id=userId&text=yo2');
+	
 });
 
 

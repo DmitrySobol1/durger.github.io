@@ -8,12 +8,14 @@
 </head>
 
 <script>
-    var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-    var textField = document.getElementById('telegramIdField');
-    textField.innerHTML = userId;
+    
+    function showMyId(){
+      var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+      var textField = document.getElementById('telegramIdField');
+      textField.textContent = userId;
+    } 
 
-
-
+  
 
     function consolePrint() {
       let task = document.getElementById("task").value;
@@ -108,7 +110,7 @@
 
 <div class="container">
     
-    <div>My id2:<span id="telegramIdField"></span></div>
+    <div>My id3:</div><span id="telegramIdField">123</span>
   
     <div class="name">
       <div class="label">Текст задачи</div>
@@ -123,6 +125,9 @@
   
     <div class="buttonsdown">
       <div><button onclick="showMyTasks()">Покажи мои задачи</button> </div>
+
+      <div class="buttonsdown">
+        <div><button onclick="showMyId()">showMyId</button> </div>
         
   
   </div> 

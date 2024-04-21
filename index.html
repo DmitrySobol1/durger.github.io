@@ -1,22 +1,25 @@
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
+<script src="https://telegram.org/js/telegram-web-app.js">
+
 
   document.addEventListener('DOMContentLoaded', function() {
     // Расширение веб-приложения Telegram, если доступно
     if (window.Telegram && window.Telegram.WebApp) {
         window.Telegram.WebApp.expand();
+        
     }
-       
+    
+    var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+    var textField = document.getElementById('telegramIdField');
+    textField.innerHTML = userId;
+
   });
 
-var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-var textField = document.getElementById('telegramIdField');
-textField.innerHTML = userId;
+
 
 
 </script>
 
 <body>
-  <div>id1=</div><span id="telegramIdField"></span>
+  <div>id2=</div><span id="telegramIdField"></span>
 
 </body>

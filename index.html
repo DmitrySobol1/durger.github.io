@@ -41,7 +41,11 @@
 <body>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+<div>
+  <button onclick="showvegetable()">овощ</button>
+  <button onclick="showfruits()">фрукт</button>
 
+</div>
 
 <div class="line">
   
@@ -71,6 +75,22 @@
     <div><img id="img3" class="img" src='https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png'></img></div>
     <div id="name3">name4</div>
     <div id="price3">price4</div>
+  </div>
+
+</div> 
+
+<div class="line">
+  
+  <div class="tovar">
+    <div><img id="img4" class="img" src='https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png'></img></div>
+    <div id="name4">name3</div>
+    <div id="price4">price3</div>
+  </div>
+  
+  <div class="tovar">
+    <div><img id="img5" class="img" src='https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png'></img></div>
+    <div id="name5">name4</div>
+    <div id="price5">price4</div>
   </div>
 
 </div> 
@@ -111,7 +131,7 @@
     .then(data => {
     console.log(data); // Здесь вы можете использовать данные JSON
     for (i=0 ; i < data.count ; i++ ){
-      console.log(data.results[i].название);
+      console.log(data.results[i].type.value);
       
       var currentImg='img'+[i];
       var currentName='name'+[i];
@@ -126,21 +146,126 @@
       price.innerText = data.results[i].цена + ' р.';
      
 
-     
-
-      
-       
-
-
     }
     })
     .catch(error => {
     // Обработка ошибки
     });
 
+
+
+    
     
 
   });
+
+function showvegetable(){
+
+fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': 'Token mBWaX1jGTuMGhmfdhq5FdX2JGyz4aYeu'
+}
+})
+.then(response => {
+// Обработка ответа
+return response.json(); // Разрешаем Promise и возвращаем его
+})
+.then(data => {
+console.log(data); // Здесь вы можете использовать данные JSON
+for (i=0 ; i < data.count ; i++ ){
+
+if (data.results[i].type.value=='овощ') {
+ 
+console.log(data.results[i].название);
+var currentImg='img'+[i];
+var currentName='name'+[i];
+var currentPrice='price'+[i];
+
+var img = document.getElementById(currentImg);
+var name = document.getElementById(currentName);
+var price = document.getElementById(currentPrice);
+
+img.src = data.results[i].фото
+name.innerText = data.results[i].название;
+price.innerText = data.results[i].цена + ' р.';
+
+
+} else {
+  var currentImg='img'+[i];
+var currentName='name'+[i];
+var currentPrice='price'+[i];
+
+var img = document.getElementById(currentImg);
+var name = document.getElementById(currentName);
+var price = document.getElementById(currentPrice);
+
+img.src = 'no';
+name.innerText = 'no';
+price.innerText = 'no';
+
+}
+}})
+.catch(error => {
+// Обработка ошибки
+});
+
+}
+
+function showfruits(){
+
+fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': 'Token mBWaX1jGTuMGhmfdhq5FdX2JGyz4aYeu'
+}
+})
+.then(response => {
+// Обработка ответа
+return response.json(); // Разрешаем Promise и возвращаем его
+})
+.then(data => {
+console.log(data); // Здесь вы можете использовать данные JSON
+for (i=0 ; i < data.count ; i++ ){
+
+if (data.results[i].type.value=='фрукт') {
+ 
+console.log(data.results[i].название);
+var currentImg='img'+[i];
+var currentName='name'+[i];
+var currentPrice='price'+[i];
+
+var img = document.getElementById(currentImg);
+var name = document.getElementById(currentName);
+var price = document.getElementById(currentPrice);
+
+img.src = data.results[i].фото
+name.innerText = data.results[i].название;
+price.innerText = data.results[i].цена + ' р.';
+
+
+} else {
+  var currentImg='img'+[i];
+var currentName='name'+[i];
+var currentPrice='price'+[i];
+
+var img = document.getElementById(currentImg);
+var name = document.getElementById(currentName);
+var price = document.getElementById(currentPrice);
+
+img.src = 'no';
+name.innerText = 'no';
+price.innerText = 'no';
+
+}
+}})
+.catch(error => {
+// Обработка ошибки
+});
+
+}
 
 
 </script>

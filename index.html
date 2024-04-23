@@ -115,6 +115,11 @@
     newTovar.appendChild(newTovar_price);
     newTovar_price.innerText = data.results[i].цена;
 
+    var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = data.results[i].id;
+    newTovar.appendChild(addbutton);
+
 
 // второй товар в столбце
     var newTovar = document.createElement('div');
@@ -132,7 +137,12 @@
 
     var newTovar_price = document.createElement('div');
     newTovar.appendChild(newTovar_price);
-    newTovar_price.innerText = data.results[i+1].цена;   
+    newTovar_price.innerText = data.results[i+1].цена;  
+    
+    var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = data.results[i+1].id;
+    newTovar.appendChild(addbutton);
 
     
     } else {
@@ -162,6 +172,11 @@ newTovar_name.innerText = data.results[i].название;
 var newTovar_price = document.createElement('div');
 newTovar.appendChild(newTovar_price);
 newTovar_price.innerText = data.results[i].цена;
+
+var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = data.results[i].id;
+    newTovar.appendChild(addbutton);
 
     }
 
@@ -215,7 +230,8 @@ for (i=0 ; i < data.count ; i=i+1){
         var object = {
             name: data.results[i].название,
             price: data.results[i].цена,
-            img: data.results[i].фото 
+            img: data.results[i].фото,
+            id: data.results[i].id
         }
       
     array.push(object);
@@ -252,6 +268,11 @@ for (i=0 ; i < array.length; i=i+2){
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
       newTovar_price.innerText = array[i].price;
+
+      var addbutton = document.createElement('button');
+      addbutton.innerHTML = 'добавить';
+      addbutton.id = array[i].id;
+      newTovar.appendChild(addbutton);
   
   
     // второй товар в столбце
@@ -270,7 +291,12 @@ for (i=0 ; i < array.length; i=i+2){
   
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i+1].price;   
+      newTovar_price.innerText = array[i+1].price;  
+      
+      var addbutton = document.createElement('button');
+      addbutton.innerHTML = 'добавить';
+      addbutton.id = array[i+1].id;
+      newTovar.appendChild(addbutton);
   
       
       } else {
@@ -300,6 +326,11 @@ for (i=0 ; i < array.length; i=i+2){
   var newTovar_price = document.createElement('div');
   newTovar.appendChild(newTovar_price);
   newTovar_price.innerText = array[i].price;
+
+  var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = array[i].id;
+    newTovar.appendChild(addbutton);
   
       }
 
@@ -341,7 +372,8 @@ for (i=0 ; i < data.count ; i=i+1){
         var object = {
             name: data.results[i].название,
             price: data.results[i].цена,
-            img: data.results[i].фото 
+            img: data.results[i].фото,
+            id: data.results[i].id
         }
       
     array.push(object);
@@ -378,6 +410,11 @@ for (i=0 ; i < array.length; i=i+2){
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
       newTovar_price.innerText = array[i].price;
+
+      var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = array[i].id;
+    newTovar.appendChild(addbutton);
   
   
     // второй товар в столбце
@@ -396,7 +433,12 @@ for (i=0 ; i < array.length; i=i+2){
   
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i+1].price;   
+      newTovar_price.innerText = array[i+1].price;  
+      
+      var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = array[i+1].id;
+    newTovar.appendChild(addbutton);
   
       
       } else {
@@ -426,6 +468,11 @@ for (i=0 ; i < array.length; i=i+2){
   var newTovar_price = document.createElement('div');
   newTovar.appendChild(newTovar_price);
   newTovar_price.innerText = array[i].price;
+
+  var addbutton = document.createElement('button');
+    addbutton.innerHTML = 'добавить';
+    addbutton.id = array[i].id;
+    newTovar.appendChild(addbutton);
   
       }
 

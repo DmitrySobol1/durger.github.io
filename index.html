@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document2</title>
+  <title>Document3</title>
   
 </head>
 
@@ -33,6 +33,7 @@
   .img {
     width: 130px;
     height: 130px;
+    border-radius: 10px;
   }
 
   
@@ -42,8 +43,8 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <div>
-  <button onclick="showvegetable()">овощ</button>
-  <button onclick="showfruits()">фрукт</button>
+  <button onclick="showvegetable()">овощи</button>
+  <button onclick="showfruits()">фрукты</button>
   <button onclick="showall()">показать все</button>
   
 
@@ -116,7 +117,7 @@
 
 
 // второй товар в столбце
-var newTovar = document.createElement('div');
+    var newTovar = document.createElement('div');
     newTovar.className = 'tovar';
     newLine.appendChild(newTovar);
     
@@ -189,116 +190,6 @@ location.reload();
 
 function showvegetable(){
 
-fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
-method: 'GET',
-headers: {
-  'Content-Type': 'application/json',
-  'Authorization': 'Token mBWaX1jGTuMGhmfdhq5FdX2JGyz4aYeu'
-}
-})
-.then(response => {
-// Обработка ответа
-return response.json(); // Разрешаем Promise и возвращаем его
-})
-.then(data => {
-// console.log(data); // Здесь вы можете использовать данные JSON
-// Удалить все элементы со страницы
-const elements = document.querySelectorAll('.line');
-elements.forEach(element => element.remove());
-
-for (i=0 ; i < data.count ; i=i+2 ){
-
-if (data.results[i].type.value=='овощ') {
-
-if (i+1 < data.count  )  {
-        
-        // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-      // Присваивание класса новому элементу
-      newLine.className = 'line';
-  
-      // Добавление нового элемента в DOM
-      document.body.appendChild(newLine);
-  
-      var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=data.results[i].фото;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = data.results[i].название;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = data.results[i].цена;
-  
-  
-  // второй товар в столбце
-  var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=data.results[i+1].фото;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = data.results[i+1].название;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = data.results[i+1].цена;   
-  
-      
-      } else {
-          // Если нечетное количество товаров
-           // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-  // Присваивание класса новому элементу
-  newLine.className = 'line';
-  
-  // Добавление нового элемента в DOM
-  document.body.appendChild(newLine);
-  
-  var newTovar = document.createElement('div');
-  newTovar.className = 'tovar';
-  newLine.appendChild(newTovar);
-  
-  var newTovar_img = document.createElement('img');
-  newTovar_img.className = 'img';
-  newTovar_img.src=data.results[i].фото;
-  newTovar.appendChild(newTovar_img); 
-  
-  var newTovar_name = document.createElement('div');
-  newTovar.appendChild(newTovar_name);
-  newTovar_name.innerText = data.results[i].название;
-  
-  var newTovar_price = document.createElement('div');
-  newTovar.appendChild(newTovar_price);
-  newTovar_price.innerText = data.results[i].цена;
-  
-      }
-    
-
-} 
-
-}})
-.catch(error => {
-// Обработка ошибки
-});
-
-}
-
-function showfruits(){
     fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
 method: 'GET',
 headers: {
@@ -316,11 +207,25 @@ return response.json(); // Разрешаем Promise и возвращаем е
 const elements = document.querySelectorAll('.line');
 elements.forEach(element => element.remove());
 
-for (i=0 ; i < data.count ; i=i+2 ){
+var array = [];
 
-if (data.results[i].type.value=='фрукт') {
+for (i=0 ; i < data.count ; i=i+1){
+    
+    if (data.results[i].type.value=='овощ') {
+        var object = {
+            name: data.results[i].название,
+            price: data.results[i].цена,
+            img: data.results[i].фото 
+        }
+      
+    array.push(object);
 
-if (i+1 < data.count  )  {
+} 
+}
+
+for (i=0 ; i < array.length; i=i+2){
+   
+    if (i+1 < array.length  )  {
         
         // Создание нового элемента div
       var newLine = document.createElement('div');
@@ -337,35 +242,35 @@ if (i+1 < data.count  )  {
       
       var newTovar_img = document.createElement('img');
       newTovar_img.className = 'img';
-      newTovar_img.src=data.results[i].фото;
+      newTovar_img.src=array[i].img;
       newTovar.appendChild(newTovar_img); 
   
       var newTovar_name = document.createElement('div');
       newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = data.results[i].название;
+      newTovar_name.innerText = array[i].name;
   
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = data.results[i].цена;
+      newTovar_price.innerText = array[i].price;
   
   
-  // второй товар в столбце
-  var newTovar = document.createElement('div');
+    // второй товар в столбце
+      var newTovar = document.createElement('div');
       newTovar.className = 'tovar';
       newLine.appendChild(newTovar);
       
       var newTovar_img = document.createElement('img');
       newTovar_img.className = 'img';
-      newTovar_img.src=data.results[i+1].фото;
+      newTovar_img.src=array[i+1].img;
       newTovar.appendChild(newTovar_img); 
   
       var newTovar_name = document.createElement('div');
       newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = data.results[i+1].название;
+      newTovar_name.innerText = array[i+1].name;
   
       var newTovar_price = document.createElement('div');
       newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = data.results[i+1].цена;   
+      newTovar_price.innerText = array[i+1].price;   
   
       
       } else {
@@ -385,23 +290,150 @@ if (i+1 < data.count  )  {
   
   var newTovar_img = document.createElement('img');
   newTovar_img.className = 'img';
-  newTovar_img.src=data.results[i].фото;
+  newTovar_img.src=array[i].img;
   newTovar.appendChild(newTovar_img); 
   
   var newTovar_name = document.createElement('div');
   newTovar.appendChild(newTovar_name);
-  newTovar_name.innerText = data.results[i].название;
+  newTovar_name.innerText = array[i].name;
   
   var newTovar_price = document.createElement('div');
   newTovar.appendChild(newTovar_price);
-  newTovar_price.innerText = data.results[i].цена;
+  newTovar_price.innerText = array[i].price;
   
       }
+
+
+}
+
+
+})
+.catch(error => {
+// Обработка ошибки
+});
+
+}
+
+
+function showfruits() {
+    fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': 'Token mBWaX1jGTuMGhmfdhq5FdX2JGyz4aYeu'
+}
+})
+.then(response => {
+// Обработка ответа
+return response.json(); // Разрешаем Promise и возвращаем его
+})
+.then(data => {
+// console.log(data); // Здесь вы можете использовать данные JSON
+// Удалить все элементы со страницы
+const elements = document.querySelectorAll('.line');
+elements.forEach(element => element.remove());
+
+var array = [];
+
+for (i=0 ; i < data.count ; i=i+1){
     
+    if (data.results[i].type.value=='фрукт') {
+        var object = {
+            name: data.results[i].название,
+            price: data.results[i].цена,
+            img: data.results[i].фото 
+        }
+      
+    array.push(object);
 
 } 
+}
 
-}})
+for (i=0 ; i < array.length; i=i+2){
+   
+    if (i+1 < array.length  )  {
+        
+        // Создание нового элемента div
+      var newLine = document.createElement('div');
+  
+      // Присваивание класса новому элементу
+      newLine.className = 'line';
+  
+      // Добавление нового элемента в DOM
+      document.body.appendChild(newLine);
+  
+      var newTovar = document.createElement('div');
+      newTovar.className = 'tovar';
+      newLine.appendChild(newTovar);
+      
+      var newTovar_img = document.createElement('img');
+      newTovar_img.className = 'img';
+      newTovar_img.src=array[i].img;
+      newTovar.appendChild(newTovar_img); 
+  
+      var newTovar_name = document.createElement('div');
+      newTovar.appendChild(newTovar_name);
+      newTovar_name.innerText = array[i].name;
+  
+      var newTovar_price = document.createElement('div');
+      newTovar.appendChild(newTovar_price);
+      newTovar_price.innerText = array[i].price;
+  
+  
+    // второй товар в столбце
+      var newTovar = document.createElement('div');
+      newTovar.className = 'tovar';
+      newLine.appendChild(newTovar);
+      
+      var newTovar_img = document.createElement('img');
+      newTovar_img.className = 'img';
+      newTovar_img.src=array[i+1].img;
+      newTovar.appendChild(newTovar_img); 
+  
+      var newTovar_name = document.createElement('div');
+      newTovar.appendChild(newTovar_name);
+      newTovar_name.innerText = array[i+1].name;
+  
+      var newTovar_price = document.createElement('div');
+      newTovar.appendChild(newTovar_price);
+      newTovar_price.innerText = array[i+1].price;   
+  
+      
+      } else {
+          // Если нечетное количество товаров
+           // Создание нового элемента div
+      var newLine = document.createElement('div');
+  
+  // Присваивание класса новому элементу
+  newLine.className = 'line';
+  
+  // Добавление нового элемента в DOM
+  document.body.appendChild(newLine);
+  
+  var newTovar = document.createElement('div');
+  newTovar.className = 'tovar';
+  newLine.appendChild(newTovar);
+  
+  var newTovar_img = document.createElement('img');
+  newTovar_img.className = 'img';
+  newTovar_img.src=array[i].img;
+  newTovar.appendChild(newTovar_img); 
+  
+  var newTovar_name = document.createElement('div');
+  newTovar.appendChild(newTovar_name);
+  newTovar_name.innerText = array[i].name;
+  
+  var newTovar_price = document.createElement('div');
+  newTovar.appendChild(newTovar_price);
+  newTovar_price.innerText = array[i].price;
+  
+      }
+
+
+}
+
+
+})
 .catch(error => {
 // Обработка ошибки
 });

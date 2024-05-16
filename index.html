@@ -1,3 +1,6 @@
+
+<!-- ПРОЕКТ С 1м столбцом -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +14,8 @@
   .line {
     /* border: 1px solid black; */
     display: flex;
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
     /* background-color: lightblue; */
     margin:5px;
   }
@@ -36,11 +39,21 @@
     border-radius: 10px;
   }
 
+  .addbuttons {
+   border-radius: 10px;
+
+  }
+
+  .counterDiv {
+    display: flex;
+  }
+
   
 </style>
 
+
 <body>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  
 
 <div>
   <button onclick="showvegetable()">овощи2</button>
@@ -56,19 +69,101 @@
 
 <script>
 
-  // // Расширение аппки на весь экран
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Расширение веб-приложения Telegram, если доступно
-    if (window.Telegram && window.Telegram.WebApp) {
-        window.Telegram.WebApp.expand();
-        
-    }
+    // ловим нажатие кнопки "добавить" и меняем на счетчик
+    document.body.addEventListener('click', function(event) {
+    if (event.target.matches('.addbuttons')) { // Проверяем, является ли элемент кнопкой с классом .addbuttons
     
-    // var userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-    // var textField = document.getElementById('telegramIdField');
-    // textField.innerHTML = userId;
+    var counterDiv = document.createElement('div')
+    counterDiv.className = 'counterDiv';
+    counterDiv.id = 'counterDiv'+event.target.id;
+    
+    var plus_button = document.createElement('button');
+    plus_button.className = 'plusbuttons';
+    plus_button.textContent = '+';
+    plus_button.id = 'plus'+event.target.id;
+    counterDiv.appendChild(plus_button); 
 
+    var counter = document.createElement('span');
+    var counterNum = 1;
+    counter.id = 'counter'+event.target.id;
+    counter.innerText = counterNum;
+    counterDiv.appendChild(counter); 
+
+    var minus_button = document.createElement('button');
+    minus_button.className = 'minusbuttons';
+    minus_button.textContent = '-';
+    minus_button.id = 'minus'+event.target.id;
+    counterDiv.appendChild(minus_button); 
+
+    // Заменяем старый элемент новым
+    if (event.target) {
+    event.target.replaceWith(counterDiv);
+    }
+    }
+    });
+
+
+    // ловим нажатие кнопки "плюс" 
+    document.body.addEventListener('click', function(event) {
+    if (event.target.matches('.plusbuttons')) { 
+    
+    
+    let originalString = event.target.id; 
+    let stringToReplace = "plus"; 
+    let replacementString = "counter";
+    let newString = originalString.replace(stringToReplace, replacementString);
+    
+    var counterSpan = document.getElementById(newString);
+    var counterValue = counterSpan.innerText;
+    
+    var counterNew = parseInt(counterValue)+1;
+    counterSpan.innerText = counterNew;
+
+    }; 
+    });  
+
+    // ловим нажатие кнопки "минус" 
+    document.body.addEventListener('click', function(event) {
+    if (event.target.matches('.minusbuttons')) { 
+    
+    
+    let originalString = event.target.id; 
+    let stringToReplace = "minus"; 
+    let replacementString = "counter";
+    let newString = originalString.replace(stringToReplace, replacementString);
+    
+    var counterSpan = document.getElementById(newString);
+    var counterValue = counterSpan.innerText;
+    
+    counterValue = parseInt(counterValue);
+
+    if (counterValue == 1){
+        // удаляем счетчик и меняем на кнопку "добавить"
+        var Tovar_button = document.createElement('button');
+        Tovar_button.className = 'addbuttons';
+        Tovar_button.textContent = 'добавить';
+        
+        let originalString = event.target.id; 
+        let stringToReplace = "minus"; 
+        let replacementString = "counterDiv";
+        let newString = originalString.replace(stringToReplace, replacementString);
+
+        var counterDiv = document.getElementById(newString);
+
+        // Заменяем старый элемент новым
+         if (counterDiv) {
+            counterDiv.replaceWith(Tovar_button);
+        }
+            
+
+    } else {
+    var counterNew = counterValue-1;
+    counterSpan.innerText = counterNew;
+      }
+    }; 
+    });  
+
+   
 
     // Получаем товары из БД
     fetch('https://api.baserow.io/api/database/rows/table/287613/?user_field_names=true', {
@@ -84,103 +179,41 @@
     })
     .then(data => {
     
-    for (i=0 ; i < data.count ; i=i+2 ){
-      
-      
-    if (i+1 < data.count  )  {
-        
-      // Создание нового элемента div
-    var newLine = document.createElement('div');
+    for (i=0 ; i < data.count ; i=i+1 ){
 
-    // Присваивание класса новому элементу
-    newLine.className = 'line';
+            
+      var newLine = document.createElement('div'); 
+      newLine.className = 'line';
+      document.body.appendChild(newLine);
 
-    // Добавление нового элемента в DOM
-    document.body.appendChild(newLine);
+         var firstColumn = document.createElement('div');
+         newLine.appendChild(firstColumn);
 
-    var newTovar = document.createElement('div');
-    newTovar.className = 'tovar';
-    newLine.appendChild(newTovar);
-    
-    var newTovar_img = document.createElement('img');
-    newTovar_img.className = 'img';
-    newTovar_img.src=data.results[i].фото;
-    newTovar.appendChild(newTovar_img); 
+            var Tovar_img = document.createElement('img');
+            Tovar_img.className = 'img';
+            Tovar_img.src=data.results[i].фото;
+            firstColumn.appendChild(Tovar_img); 
 
-    var newTovar_name = document.createElement('div');
-    newTovar.appendChild(newTovar_name);
-    newTovar_name.innerText = data.results[i].название;
+     
+         var secondColumn = document.createElement('div');
+         newLine.appendChild(secondColumn);
 
-    var newTovar_price = document.createElement('div');
-    newTovar.appendChild(newTovar_price);
-    newTovar_price.innerText = data.results[i].цена;
+            var Tovar_name = document.createElement('div');
+            secondColumn.appendChild(Tovar_name);
+            Tovar_name.innerText = data.results[i].название;
 
-    var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = data.results[i].id;
-    newTovar.appendChild(addbutton);
+            var Tovar_price = document.createElement('div');
+            secondColumn.appendChild(Tovar_price);
+            Tovar_price.innerText = data.results[i].цена;
 
-
-// второй товар в столбце
-    var newTovar = document.createElement('div');
-    newTovar.className = 'tovar';
-    newLine.appendChild(newTovar);
-    
-    var newTovar_img = document.createElement('img');
-    newTovar_img.className = 'img';
-    newTovar_img.src=data.results[i+1].фото;
-    newTovar.appendChild(newTovar_img); 
-
-    var newTovar_name = document.createElement('div');
-    newTovar.appendChild(newTovar_name);
-    newTovar_name.innerText = data.results[i+1].название;
-
-    var newTovar_price = document.createElement('div');
-    newTovar.appendChild(newTovar_price);
-    newTovar_price.innerText = data.results[i+1].цена;  
-    
-    var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = data.results[i+1].id;
-    newTovar.appendChild(addbutton);
-
-    
-    } else {
-        // Если нечетное количество товаров
-         // Создание нового элемента div
-    var newLine = document.createElement('div');
-
-// Присваивание класса новому элементу
-newLine.className = 'line';
-
-// Добавление нового элемента в DOM
-document.body.appendChild(newLine);
-
-var newTovar = document.createElement('div');
-newTovar.className = 'tovar';
-newLine.appendChild(newTovar);
-
-var newTovar_img = document.createElement('img');
-newTovar_img.className = 'img';
-newTovar_img.src=data.results[i].фото;
-newTovar.appendChild(newTovar_img); 
-
-var newTovar_name = document.createElement('div');
-newTovar.appendChild(newTovar_name);
-newTovar_name.innerText = data.results[i].название;
-
-var newTovar_price = document.createElement('div');
-newTovar.appendChild(newTovar_price);
-newTovar_price.innerText = data.results[i].цена;
-
-var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = data.results[i].id;
-    newTovar.appendChild(addbutton);
-
-    }
-
-
+            var Tovar_button = document.createElement('button');
+            Tovar_button.className = 'addbuttons';
+            Tovar_button.textContent = 'добавить';
+            Tovar_button.id = data.results[i].id;
+            secondColumn.appendChild(Tovar_button);
+            // Tovar_button.addEventListener('click', function() {
+            // console.log(this.id); // Выводим текст кнопки в консоль
+            // });
 
     }
     })
@@ -190,12 +223,10 @@ var addbutton = document.createElement('button');
 
 
 
-    
-    
-
-  });
 
 
+
+  
  function showall(){
     // Обновить страницу
 location.reload();
@@ -235,108 +266,43 @@ for (i=0 ; i < data.count ; i=i+1){
         }
       
     array.push(object);
-
+   
 } 
 }
 
-for (i=0 ; i < array.length; i=i+2){
+for (i=0 ; i < array.length; i=i+1){
    
-    if (i+1 < array.length  )  {
-        
-        // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-      // Присваивание класса новому элементу
+   var newLine = document.createElement('div'); 
       newLine.className = 'line';
-  
-      // Добавление нового элемента в DOM
       document.body.appendChild(newLine);
-  
-      var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=array[i].img;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = array[i].name;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i].price;
 
-      var addbutton = document.createElement('button');
-      addbutton.innerHTML = 'добавить';
-      addbutton.id = array[i].id;
-      newTovar.appendChild(addbutton);
-  
-  
-    // второй товар в столбце
-      var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=array[i+1].img;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = array[i+1].name;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i+1].price;  
-      
-      var addbutton = document.createElement('button');
-      addbutton.innerHTML = 'добавить';
-      addbutton.id = array[i+1].id;
-      newTovar.appendChild(addbutton);
-  
-      
-      } else {
-          // Если нечетное количество товаров
-           // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-  // Присваивание класса новому элементу
-  newLine.className = 'line';
-  
-  // Добавление нового элемента в DOM
-  document.body.appendChild(newLine);
-  
-  var newTovar = document.createElement('div');
-  newTovar.className = 'tovar';
-  newLine.appendChild(newTovar);
-  
-  var newTovar_img = document.createElement('img');
-  newTovar_img.className = 'img';
-  newTovar_img.src=array[i].img;
-  newTovar.appendChild(newTovar_img); 
-  
-  var newTovar_name = document.createElement('div');
-  newTovar.appendChild(newTovar_name);
-  newTovar_name.innerText = array[i].name;
-  
-  var newTovar_price = document.createElement('div');
-  newTovar.appendChild(newTovar_price);
-  newTovar_price.innerText = array[i].price;
+         var firstColumn = document.createElement('div');
+         newLine.appendChild(firstColumn);
 
-  var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = array[i].id;
-    newTovar.appendChild(addbutton);
-  
-      }
+            var Tovar_img = document.createElement('img');
+            Tovar_img.className = 'img';
+            Tovar_img.src=array[i].img;
+            firstColumn.appendChild(Tovar_img); 
 
+     
+         var secondColumn = document.createElement('div');
+         newLine.appendChild(secondColumn);
+
+            var Tovar_name = document.createElement('div');
+            secondColumn.appendChild(Tovar_name);
+            Tovar_name.innerText = array[i].name;
+
+            var Tovar_price = document.createElement('div');
+            secondColumn.appendChild(Tovar_price);
+            Tovar_price.innerText = array[i].price;
+
+            var Tovar_button = document.createElement('button');
+            Tovar_button.className = 'addbuttons';
+            Tovar_button.innerHTML = 'добавить';
+            Tovar_button.id = array[i].id;
+            secondColumn.appendChild(Tovar_button);
 
 }
-
 
 })
 .catch(error => {
@@ -381,104 +347,38 @@ for (i=0 ; i < data.count ; i=i+1){
 } 
 }
 
-for (i=0 ; i < array.length; i=i+2){
+for (i=0 ; i < array.length; i=i+1){
    
-    if (i+1 < array.length  )  {
-        
-        // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-      // Присваивание класса новому элементу
+   var newLine = document.createElement('div'); 
       newLine.className = 'line';
-  
-      // Добавление нового элемента в DOM
       document.body.appendChild(newLine);
-  
-      var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=array[i].img;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = array[i].name;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i].price;
 
-      var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = array[i].id;
-    newTovar.appendChild(addbutton);
-  
-  
-    // второй товар в столбце
-      var newTovar = document.createElement('div');
-      newTovar.className = 'tovar';
-      newLine.appendChild(newTovar);
-      
-      var newTovar_img = document.createElement('img');
-      newTovar_img.className = 'img';
-      newTovar_img.src=array[i+1].img;
-      newTovar.appendChild(newTovar_img); 
-  
-      var newTovar_name = document.createElement('div');
-      newTovar.appendChild(newTovar_name);
-      newTovar_name.innerText = array[i+1].name;
-  
-      var newTovar_price = document.createElement('div');
-      newTovar.appendChild(newTovar_price);
-      newTovar_price.innerText = array[i+1].price;  
-      
-      var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = array[i+1].id;
-    newTovar.appendChild(addbutton);
-  
-      
-      } else {
-          // Если нечетное количество товаров
-           // Создание нового элемента div
-      var newLine = document.createElement('div');
-  
-  // Присваивание класса новому элементу
-  newLine.className = 'line';
-  
-  // Добавление нового элемента в DOM
-  document.body.appendChild(newLine);
-  
-  var newTovar = document.createElement('div');
-  newTovar.className = 'tovar';
-  newLine.appendChild(newTovar);
-  
-  var newTovar_img = document.createElement('img');
-  newTovar_img.className = 'img';
-  newTovar_img.src=array[i].img;
-  newTovar.appendChild(newTovar_img); 
-  
-  var newTovar_name = document.createElement('div');
-  newTovar.appendChild(newTovar_name);
-  newTovar_name.innerText = array[i].name;
-  
-  var newTovar_price = document.createElement('div');
-  newTovar.appendChild(newTovar_price);
-  newTovar_price.innerText = array[i].price;
+         var firstColumn = document.createElement('div');
+         newLine.appendChild(firstColumn);
 
-  var addbutton = document.createElement('button');
-    addbutton.innerHTML = 'добавить';
-    addbutton.id = array[i].id;
-    newTovar.appendChild(addbutton);
-  
-      }
+            var Tovar_img = document.createElement('img');
+            Tovar_img.className = 'img';
+            Tovar_img.src=array[i].img;
+            firstColumn.appendChild(Tovar_img); 
 
+     
+         var secondColumn = document.createElement('div');
+         newLine.appendChild(secondColumn);
 
+            var Tovar_name = document.createElement('div');
+            secondColumn.appendChild(Tovar_name);
+            Tovar_name.innerText = array[i].name;
+
+            var Tovar_price = document.createElement('div');
+            secondColumn.appendChild(Tovar_price);
+            Tovar_price.innerText = array[i].price;
+
+            var Tovar_button = document.createElement('button');
+            Tovar_button.className = 'addbuttons';
+            Tovar_button.innerHTML = 'добавить';
+            Tovar_button.id = array[i].id;
+            secondColumn.appendChild(Tovar_button);
 }
-
 
 })
 .catch(error => {
@@ -487,9 +387,14 @@ for (i=0 ; i < array.length; i=i+2){
 
 }
 
+function check(){
+    console.log("send");
+    
+}
+
+
 
 </script>
 
-
+<button onclick="check()">CHECK</button>
 </html>
-

@@ -388,13 +388,40 @@ for (i=0 ; i < array.length; i=i+1){
 }
 
 function check(){
-    console.log("send");
-    
+
+    fetch('https://api.telegram.org/bot7062021483:AAFE5VSb3IMG04imOet-r5vzV43JNSYBuSk/sendMessage?chat_id=412697670&text=hee', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    }).then(res=>{
+        console.log(res.json())
+    })
+
 }
+
+function checkSend(){
+fetch('https://app.leadteh.ru/api/v1/sendMessage', {
+    method: 'POST',
+    // specify id if you want to edit existing objects
+    body: JSON.stringify({
+        
+        'contact_id':23271428,
+        'text':'hee'
+
+    }),
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    }).then(res=>{
+        console.log(res.json())
+    })
+}
+
 
 
 
 </script>
 
-<button onclick="check()">CHECK</button>
+<button onclick="checkSend()">CHECK LT</button>
 </html>

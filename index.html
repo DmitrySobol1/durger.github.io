@@ -405,13 +405,14 @@ fetch('https://app.leadteh.ru/api/v1/sendMessage', {
     method: 'POST',
     // specify id if you want to edit existing objects
     body: JSON.stringify({
-        
+        'api_token':'YaDoJgaIdZaz6qNG6LGFKVVF5ZaEyoZOI6wOhkIVfuMqIWCT4AEDHnGkwnQv',
         'contact_id':23271428,
         'text':'hee'
 
     }),
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With':'XMLHttpRequest'
     },
     }).then(res=>{
         console.log(res.json())
@@ -423,5 +424,5 @@ fetch('https://app.leadteh.ru/api/v1/sendMessage', {
 
 </script>
 
-<button onclick="checkSend()">CHECK LT</button>
+<button onclick="checkSend()">CHECK LT2</button>
 </html>

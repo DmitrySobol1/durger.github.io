@@ -15,7 +15,7 @@
     /* border: 1px solid black; */
     display: flex;
     width: 200px;
-    height: 200px;
+    height: 150px;
     /* background-color: lightblue; */
     margin:5px;
   }
@@ -46,7 +46,7 @@
    padding:5px;
    border: 2px solid #37b43f;
    font-weight: 500;
-   margin: 0px 0px 15px 10px;
+   margin: 0px 0px 25px 10px;
   }
 
   .addbuttons {
@@ -97,6 +97,12 @@
     opacity: 70%;
   }
 
+  .div_category {
+    text-align: center;
+    justify-content: center; /* Горизонтальное выравнивание */
+  align-items: center;
+  }
+
 
   
 </style>
@@ -105,7 +111,7 @@
 <body>
   
 
-<div>
+<div class="div_category">
   <button onclick="showvegetable()" class="categorybuttons">овощи</button>
   <button onclick="showfruits()" class="categorybuttons">фрукты</button>
   <button onclick="showall()" class="categorybuttons">показать все</button>

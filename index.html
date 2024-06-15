@@ -39,6 +39,16 @@
     border-radius: 10px;
   }
 
+  .categorybuttons {
+   border-radius: 10px;
+   background-color:#37b43f;
+   color: white;
+   padding:5px;
+   border: 2px solid #37b43f;
+   font-weight: 500;
+   margin: 0px 0px 15px 10px;
+  }
+
   .addbuttons {
    border-radius: 10px;
    background-color:#f90;
@@ -56,7 +66,7 @@
    padding:5px;
    border: 2px solid #f90;
    font-weight: bold;
-   margin: 0px 5px 0px 0px;
+   margin: 0px 5px 0px 10px;
   }
 
   .minusbuttons {
@@ -96,9 +106,9 @@
   
 
 <div>
-  <button onclick="showvegetable()">овощи2</button>
-  <button onclick="showfruits()">фрукты</button>
-  <button onclick="showall()">показать все</button>
+  <button onclick="showvegetable()" class="categorybuttons">овощи1</button>
+  <button onclick="showfruits()" class="categorybuttons">фрукты1</button>
+  <button onclick="showall()" class="categorybuttons">показать все1</button>
   
 
 </div>
@@ -333,10 +343,12 @@ for (i=0 ; i < array.length; i=i+1){
 
             var Tovar_name = document.createElement('div');
             secondColumn.appendChild(Tovar_name);
+            Tovar_name.className = 'Tovar_name';
             Tovar_name.innerText = array[i].name;
 
             var Tovar_price = document.createElement('div');
             secondColumn.appendChild(Tovar_price);
+            Tovar_price.className = 'Tovar_price';
             Tovar_price.innerText = array[i].price;
 
             var Tovar_button = document.createElement('button');
@@ -410,10 +422,12 @@ for (i=0 ; i < array.length; i=i+1){
 
             var Tovar_name = document.createElement('div');
             secondColumn.appendChild(Tovar_name);
+            Tovar_name.className = 'Tovar_name';
             Tovar_name.innerText = array[i].name;
 
             var Tovar_price = document.createElement('div');
             secondColumn.appendChild(Tovar_price);
+            Tovar_price.className = 'Tovar_price';
             Tovar_price.innerText = array[i].price;
 
             var Tovar_button = document.createElement('button');

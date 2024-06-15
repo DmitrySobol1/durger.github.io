@@ -41,12 +41,52 @@
 
   .addbuttons {
    border-radius: 10px;
+   background-color:#f90;
+   color: white;
+   padding:10px;
+   border: 2px solid #f90;
+   font-weight: 500;
+   margin: 0px 0px 5px 10px;
+  }
 
+  .plusbuttons {
+   border-radius: 5px;
+   background-color:#f90;
+   color: white;
+   padding:5px;
+   border: 2px solid #f90;
+   font-weight: bold;
+   margin: 0px 5px 0px 0px;
+  }
+
+  .minusbuttons {
+   border-radius: 5px;
+   background-color:red;
+   color: white;
+   padding:7px;
+   border: 2px solid red;
+   font-weight: bold;
+   margin: 0px 0px 0px 5px;
   }
 
   .counterDiv {
     display: flex;
+    text-align: center;
+  justify-content: center; /* Выравнивание по горизонтали */
+  align-items: center;
   }
+
+  .Tovar_name {
+    font-weight: 600;
+    margin: 15px 0px 5px 10px;
+  }
+
+  .Tovar_price {
+    font-weight: 600;
+    margin: 0px 0px 15px 10px;
+    opacity: 70%;
+  }
+
 
   
 </style>
@@ -85,6 +125,7 @@
 
     var counter = document.createElement('span');
     var counterNum = 1;
+    // counter.className = 'counter';
     counter.id = 'counter'+event.target.id;
     counter.innerText = counterNum;
     counterDiv.appendChild(counter); 
@@ -200,11 +241,13 @@
 
             var Tovar_name = document.createElement('div');
             secondColumn.appendChild(Tovar_name);
+            Tovar_name.className = 'Tovar_name';
             Tovar_name.innerText = data.results[i].название;
 
             var Tovar_price = document.createElement('div');
             secondColumn.appendChild(Tovar_price);
-            Tovar_price.innerText = data.results[i].цена;
+            Tovar_price.className = 'Tovar_price';
+            Tovar_price.innerText = data.results[i].цена+' р/кг';
 
             var Tovar_button = document.createElement('button');
             Tovar_button.className = 'addbuttons';
@@ -424,5 +467,4 @@ fetch('https://app.leadteh.ru/api/v1/sendMessage', {
 
 </script>
 
-<button onclick="checkSend()">CHECK LT2</button>
 </html>

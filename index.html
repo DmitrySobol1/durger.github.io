@@ -49,6 +49,16 @@
    margin: 0px 0px 25px 10px;
   }
 
+  .cart {
+   border-radius: 10px;
+   background-color:#66f;
+   color: white;
+   padding: 10px 30px 10px 30px;
+   border: 2px solid #66f;
+   font-weight: 500;
+   margin: 0px 0px 25px 10px;
+  }
+
   .addbuttons {
    border-radius: 10px;
    background-color:#f90;
@@ -103,6 +113,20 @@
   align-items: center;
   }
 
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    background-color: #b4d2e8;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
 
   
 </style>
@@ -115,8 +139,14 @@
   <button onclick="showvegetable()" class="categorybuttons">овощи</button>
   <button onclick="showfruits()" class="categorybuttons">фрукты</button>
   <button onclick="showall()" class="categorybuttons">показать все</button>
-  
+</div>
 
+<div class="div_category">
+    <button onclick="showPopup()" class="cart">купить</button>
+</div>
+
+<div id="popup" class="popup">
+    Подлючение оплаты будем рассматривать на обучении! 
 </div>
 
 
@@ -482,6 +512,14 @@ fetch('https://app.leadteh.ru/api/v1/sendMessage', {
     })
 }
 
+
+function showPopup() {
+    var popup = document.getElementById('popup');
+    popup.style.display = 'block';
+    setTimeout(function() {
+    popup.style.display = 'none';
+    }, 1500); // Ожидание 1,5 секунды перед скрытием всплывающего окна
+  }
 
 
 

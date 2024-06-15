@@ -106,9 +106,9 @@
   
 
 <div>
-  <button onclick="showvegetable()" class="categorybuttons">овощи1</button>
-  <button onclick="showfruits()" class="categorybuttons">фрукты1</button>
-  <button onclick="showall()" class="categorybuttons">показать все1</button>
+  <button onclick="showvegetable()" class="categorybuttons">овощи</button>
+  <button onclick="showfruits()" class="categorybuttons">фрукты</button>
+  <button onclick="showall()" class="categorybuttons">показать все</button>
   
 
 </div>
@@ -349,7 +349,7 @@ for (i=0 ; i < array.length; i=i+1){
             var Tovar_price = document.createElement('div');
             secondColumn.appendChild(Tovar_price);
             Tovar_price.className = 'Tovar_price';
-            Tovar_price.innerText = array[i].price;
+            Tovar_price.innerText = array[i].price+' р/кг';
 
             var Tovar_button = document.createElement('button');
             Tovar_button.className = 'addbuttons';
@@ -428,7 +428,7 @@ for (i=0 ; i < array.length; i=i+1){
             var Tovar_price = document.createElement('div');
             secondColumn.appendChild(Tovar_price);
             Tovar_price.className = 'Tovar_price';
-            Tovar_price.innerText = array[i].price;
+            Tovar_price.innerText = array[i].price+' р/кг';
 
             var Tovar_button = document.createElement('button');
             Tovar_button.className = 'addbuttons';
